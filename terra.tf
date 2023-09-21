@@ -18,4 +18,9 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.example.id
 }
+resource "aws_instance" "example2" {
+  ami           = "ami-0261755bbcb8c4a84"
+  instance_type = "t2.medium"
+  subnet_id     = aws_subnet.example.id
+}
 
