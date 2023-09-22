@@ -23,6 +23,13 @@ resource "aws_instance" "example2" {
   instance_type = "t2.medium"
   subnet_id     = aws_subnet.example.id
 }
+
+resource "aws_instance" "example3tf" {
+  ami           = "ami-0261755bbcb8c4a84"
+  instance_type = "t2.medium"
+  subnet_id     = aws_subnet.example.id
+}
+
 resource "aws_s3_bucket" "tf-s3" {
   bucket = "s3-tfstate-6969"
   acl    = "private"
