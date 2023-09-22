@@ -1,0 +1,25 @@
+---
+- name: Install Nginx and AWS CLI
+  hosts: web
+  become: yes  # Use sudo to become a privileged user
+  gather_facts: yes  # Gather facts about the remote server
+
+  tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present  # Install the package if it's not already installed
+      tags:
+        - nginx
+
+    - name: Install AWS CLI
+      apt:
+        name: awscli
+        state: present  # Install the package if it's not already installed
+      tags:
+        - awscli
+
