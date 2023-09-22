@@ -23,4 +23,14 @@ resource "aws_instance" "example2" {
   instance_type = "t2.medium"
   subnet_id     = aws_subnet.example.id
 }
+resource "aws_s3_bucket" "tf-s3" {
+  bucket = "s3-tfstate-6969"
+  acl    = "private"
+#  region = "us-east-1"
+   force_destroy = true
 
+  tags = {
+    Name        = "tfstate-bucket"
+    Environment = "Dev"
+  }
+}
