@@ -77,13 +77,28 @@ resource "aws_instance" "server1" {
   subnet_id              = aws_subnet.public_subnet_az1.id
   vpc_security_group_ids = [aws_security_group.ssh-access.id]
   #user_data              = file("ins_script.sh")
-  #  count = 5
+  #  count = 
   tags = {
     Name = "public-ec2"
     #    Name = "Public-jump-${format("%02d", count.index + 1)}"
   }
 
 }
+resource "aws_instance" "server2" {
+  ami                    = "ami-0261755bbcb8c4a84"
+  instance_type          = "t2.micro"
+  key_name               = aws_key_pair.web.key_name
+  subnet_id              = aws_subnet.public_subnet_az1.id
+  vpc_security_group_ids = [aws_security_group.ssh-access.id]
+  #user_data              = file("ins_script.sh")
+  #  count =
+  tags = {
+    Name = "public-ec2"
+    #    Name = "Public-jump-${format("%02d", count.index + 1)}"
+  }
+
+}
+
 resource "aws_key_pair" "web" {
   key_name   = "id_rsa"
   public_key = file("./id_rsa.pub")
