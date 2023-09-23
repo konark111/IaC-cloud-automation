@@ -2,13 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('vcs checkout') {
+        stage('scm checkout') {
             steps {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/konark111/IaC-cloud-automation.git']])
             }
         }
-        
-        stage('Terraform Apply') {
+    stage('Terraform Apply') {
     steps {
         withCredentials([[
             $class: 'AmazonWebServicesCredentialsBinding',
@@ -22,6 +21,13 @@ pipeline {
         }
     }
 }
+        stage('ansible automation') {
+            steps {
+            ansiblePlaybook credentialsId: 'private_key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/terra/inventory', playbook: '/var/lib/jenkins/workspace/terra/playbook.yml'            
+                
+            }
+        }
+        
     }
 }
 
