@@ -1,0 +1,13 @@
+---
+- name: Deploy Application
+  hosts: web
+  become: yes
+
+  vars_files:
+    - encrypted_ssh_key.yml
+
+  tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+
