@@ -1,4 +1,4 @@
 [web]
 server1 ansible_host=174.129.79.184 ansible_ssh_user=ubuntu 
-
+server2 ansible_host=54.226.12.8 ansible_ssh_user=ubuntu
 
