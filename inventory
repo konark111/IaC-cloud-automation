@@ -1,6 +1,4 @@
 [web]
-<<<<<<< HEAD
-=======
 server1 ansible_host=174.129.79.184 ansible_ssh_user=ubuntu 
 
->>>>>>> 1adcca6a50f03b78e8c989708e2ff9527aae59b1
+
