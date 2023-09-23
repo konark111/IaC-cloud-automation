@@ -23,7 +23,7 @@ pipeline {
 }
         stage('ansible automation') {
             steps {
-            ansiblePlaybook credentialsId: 'private_key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/var/lib/jenkins/workspace/terra/inventory', playbook: '/var/lib/jenkins/workspace/terra/playbook.yml'            
+            ansiblePlaybook credentialsId: 'private_key', installation: 'ansible', inventory: '/var/lib/jenkins/workspace/terra/inventory', playbook: '/var/lib/jenkins/workspace/terra/playbook.yml'            
                 
             }
         }
