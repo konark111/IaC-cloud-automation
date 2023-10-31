@@ -1,25 +1,43 @@
 ---
-- name: Install Nginx and AWS CLI
-  hosts: web
-  become: yes  # Use sudo to become a privileged user
-  gather_facts: yes  # Gather facts about the remote server
-
+- name: playbook
+  become: yes
   tasks:
-    - name: Update apt package cache
+    - name: update repo
       apt:
         update_cache: yes
 
-    - name: Install Nginx
-      apt:
+    - name: install server
+      apt: 
         name: nginx
-        state: present  # Install the package if it's not already installed
-      tags:
-        - nginx
+        state: present
 
-    - name: Install AWS CLI
-      apt:
-        name: awscli
-        state: present  # Install the package if it's not already installed
-      tags:
-        - awscli
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+        enable: yes
 
+    - name: Delete content & directory
+      ansible.builtin.file:
+        state: absent
+        path: /var/www/index.html
+        ignore_errors: yes
+
+
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: /home/ubuntu/ansible/index.html
+        dest: /var/www/html
+        mode: '0777'
+
+    - name: Add the user 'bucky' with a specific uid and a primary group of 'admin'
+      ansible.builtin.user:
+        name: bucky
+        comment: Bucky dev
+        uid: 1040
+        group: admin
+
+    - name: backup logs
+      fetch:
+        src: /var/log/syslog
+        dest: /home/ubuntu/log
