@@ -91,10 +91,10 @@ resource "aws_instance" "server2" {
   subnet_id              = aws_subnet.public_subnet_az1.id
   vpc_security_group_ids = [aws_security_group.ssh-access.id]
   #user_data              = file("ins_script.sh")
-  #  count =
+  count = 4
   tags = {
-    Name = "public-ec2"
-    #    Name = "Public-jump-${format("%02d", count.index + 1)}"
+    # Name = "public-ec2"
+     Name = "Public-jump-${format("%02d", count.index + 1)}"
   }
 
 }
