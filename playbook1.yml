@@ -1,19 +1,2 @@
----
-- name: Deploy Application
-  hosts: web
-  become: yes
 
-  vars_files:
-    - encrypted_ssh_key.yml
-
-  tasks:
-    - name: Copy encrypted SSH key to remote server
-      copy:
-        content: "{{ encrypted_ssh_key }}"
-        dest: /home/user/.ssh/encryted-private.pem
-        mode: '0600'
-
-    - name: Update apt package cache
-      apt:
-        update_cache: yes
 
